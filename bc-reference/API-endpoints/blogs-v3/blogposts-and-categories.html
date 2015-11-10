@@ -23,12 +23,17 @@
 </ul>
 <h4>Parameters</h4>
 <ul>
+<<<<<<< HEAD
 <li><code>{% raw %}objectID{% endraw %}</code> - the ID of the blog <em>(integer)</em></li>
-<li><code>{% raw %}categoryID{% endraw %}</code> the Id of the category <em>(integer)</em></li>
+<li><code>{% raw %}categoryID{% endraw %}</code> the ID of the category <em>(integer)</em></li>
+=======
+<li><code>{% raw %}objectId{% endraw %}</code> - the ID of the blog <em>(integer)</em></li>
+<li><code>{% raw %}categoryId{% endraw %}</code> the Id of the category <em>(integer)</em></li>
+>>>>>>> origin/bc-reference
 <li><code>{% raw %}objectType{% endraw %}</code> - category object type is 56 <em>(integer)</em></li>
-<li><code>{% raw %}displayable{% endraw %}</code> should be 1 <em>(string)</em></li>
+<li><code>{% raw %}displayable{% endraw %}</code> should be 1 <em>(integer)</em></li>
 <li><code>{% raw %}siteId{% endraw %}</code> the ID of the site <em>(integer)</em></li>
-<li><code>{% raw %}category{% endraw %}</code> json object, listing <a href="/dev-assets/reference#!/api-endpoints/categories-v3/categories.html" title="Default category fields">default category fields</a> <em>(string)</em></li>
+<li><code>{% raw %}category{% endraw %}</code> json object, listing <a href="/reference/rest-apis-legacy/categories-v2/create-category.html" title="Default category fields">default category fields</a> <em>(object)</em></li>
 
 
 </ul>
@@ -44,12 +49,12 @@
 <div class="sample">
 <h3>Sample request</h3>
 <pre class="language-javascript"><code>{% raw %}var access_token = BCAPI.Helper.Site.getAccessToken();
-//the authorization token is now stored in the access_token cookie, we will need to pass it in the "Authorization" header
+
 
 var request = $.ajax({
     url: "/webresources/api/v3/sites/current/blogposts/1383385/categories",
     type: "GET",
-    conenection: "keep-alive",    
+    connection: "keep-alive",    
     contentType: "application/json",
     mimeType: "application/json ",
     headers: {
@@ -127,15 +132,19 @@ request.fail(function (jqXHR) {
 <pre class="language-javascript"><code>{% raw %}POST /webresources/api/v3/sites/current/blogposts/[blogpostID]/categories HTTPS/1.1
 Authorization: 14f87f21c5ea4830a06a6314a8aad82b45bc61dc08f24a0fb55599cea83ca811
 Connection: keep-alive
+<<<<<<< HEAD
+Content-Type: application/json{% endraw %}</code></pre>
+=======
 Content-Type: application/json
 
 
 {
-  "ObjectID": 303870,
-  "cateogoryID": 14606,
-  "objecType": 56,
+  "objectId": 303870,
+  "categoryId": 14606,
+  "objectType": 56,
   "displayable": 1
 }{% endraw %}</code></pre>
+>>>>>>> origin/bc-reference
 </div>
 <div class="response-sample">
 <p><strong>Response:</strong></p>
@@ -150,17 +159,44 @@ Content-Length: length{% endraw %}</code></pre>
 <div class="sample">
 <h3>Sample code</h3>
 <pre class="language-javascript"><code>{% raw %}var access_token = BCAPI.Helper.Site.getAccessToken();
+<<<<<<< HEAD
 //the authorization token is now stored in the access_token cookie, we will need to pass it in the "Authorization" header
+var  request = $.ajax({    
+     url: "/webresources/api/v3/sites/current/blogposts/303870/categories",
+      data: {
+        "items": [{
+            "categoryId": 14610
+        }]
+    },
+    type: "POST",
+	contentType: "application/json",
+    mimeType: "application/json ",
+    headers: {
+        "Authorization": $.cookie('access_token')
+    }
+});
+request.done(function(msg) {
+    console.log(msg);
+});     
+request.fail(function(jqXHR)  {    
+    console.log("Request failed.");    
+    console.log("Error code: "  + jqXHR.status);    
+    console.log("Error text: "  + jqXHR.statusText);    
+    console.log("Response text: "  + jqXHR.responseText);
+}) {% endraw -%}</code></pre>
+=======
+
 
 var request = $.ajax({<br>    url:"/webresources/api/v3/sites/current/blogposts/303870/categories",<br>    data:{"items":[{"objectId":303870,"categoryId":14610,"objectType":56,"displayable":1}]},<br>    type: "POST",<br>    contentType: "application/json",
 mimeType: "application/json ",<br>    headers: {
         "Authorization": $.cookie('access_token')<br>    }<br>});<br>request.done(function (msg) {<br>	$('.output pre').html(JSON.stringify(msg, null, 2));<br>	console.log(msg);<br><br>})<br>    request.fail(function(jqXHR) {<br>    console.log("Request failed.");<br>    console.log("Error code: " + jqXHR.status);<br>    console.log("Error text: " + jqXHR.statusText);<br>    console.log("Response text: " + jqXHR.responseText);<br>}){% endraw %}</code></pre>
+>>>>>>> origin/bc-reference
 </div>
 <hr>
 </div>
 <div id="delete">
   <h2>Remove a category from a blogpost</h2>
-<div class="description">Delete an anniversary entity.</div>
+<div class="description">Delete an category entity.</div>
 <div class="request">
 <h3>Request</h3>
 <ul>
@@ -207,7 +243,7 @@ Content-Length: length{% endraw %}</code></pre>
 <div class="sample">
 <h3>Sample code</h3>
 <pre class="language-javascript"><code>{% raw %}var access_token = BCAPI.Helper.Site.getAccessToken();
-//the authorization token is now stored in the access_token cookie, we will need to pass it in the "Authorization" header
+
 
 var request = $.ajax({<br>    url:"/webresources/api/v3/sites/current/blogposts/303870/categories?items=[{'objectId':303870,'categoryId':14610,'objectType':56,'displayable':1}]",<br>    type: "DELETE",    
     contentType: "application/json",
@@ -216,7 +252,7 @@ var request = $.ajax({<br>    url:"/webresources/api/v3/sites/current/blogp
         "Authorization": $.cookie('access_token')
     }
 });
-request.done(function (msg) {<br>	$('.output pre').html(JSON.stringify(msg, null, 2));<br>	console.log(msg);<br>
+request.done(function (msg) {<br>	console.log(msg);<br>
 })
     request.fail(function(jqXHR) {
     console.log("Request failed.");
